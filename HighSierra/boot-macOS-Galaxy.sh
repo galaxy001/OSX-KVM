@@ -11,9 +11,11 @@
 # NOTE: Tweak the "MY_OPTIONS" line in case you are having booting problems!
 ############################################################################
 
+# For Clover/SMBIOS, see https://eshop.macsales.com/guides/Mac_OS_X_Compatibility for macOS support states. iMacPro1,1 support Sierra(10.12) to Mojave(10.14).
+
 MY_OPTIONS="+pcid,+ssse3,+sse4.2,+popcnt,+avx,+aes,+xsave,+xsaveopt,check"
 
-qemu-system-x86_64 -enable-kvm -m 3072 -cpu Penryn,kvm=on,vendor=GenuineIntel,+invtsc,vmware-cpuid-freq=on,$MY_OPTIONS\
+qemu-system-x86_64 -enable-kvm -m 3072 -cpu Skylake-Server,kvm=on,vendor=GenuineIntel,+invtsc,vmware-cpuid-freq=on,$MY_OPTIONS\
 	  -machine pc-q35-2.11 \
 	  -smp 4,cores=2 \
 	  -usb -device usb-kbd -device usb-tablet \
@@ -28,5 +30,5 @@ qemu-system-x86_64 -enable-kvm -m 3072 -cpu Penryn,kvm=on,vendor=GenuineIntel,+i
 	  -drive id=MacHDD,if=none,file=./mac_hdd.img,format=qcow2 \
 	  -device ide-drive,bus=ide.0,drive=MacDVD \
 	  -drive id=MacDVD,if=none,snapshot=on,media=cdrom,file=./'HighSierra-10.13.6.iso' \
-	  -netdev tap,id=net0,ifname=tap0,script=no,downscript=no -device vmxnet3,netdev=net0,id=net0,mac=52:54:00:c9:18:27 \
+	  -netdev tap,id=net0,ifname=tap0,script=no,downscript=no -device vmxnet3,netdev=net0,id=net0,mac=CB:9A:F9:2C:36:5C \
 	  -monitor stdio
